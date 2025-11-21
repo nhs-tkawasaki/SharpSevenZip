@@ -16,17 +16,31 @@ jobs:
       run:
         working-directory: SharpSevenZip
 
-    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ windows-latest ]
+        framework:
+          - netstandard2.0
+          - net6.0
+          - net8.0
+          - net48
+        include:
+          - sdk: 8.0.x
+          - framework: net6.0
+            sdk: 6.0.x
+
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: ${{ matrix.sdk }}
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build -f ${{ matrix.framework }} --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test -f ${{ matrix.framework }} --no-build --verbosity normal

@@ -35,6 +35,7 @@ jobs:
     steps:
     - name: Enable SFN
       run: fsutil behavior set disable8dot3 0
+      working-directory: .
     - uses: actions/checkout@v4
     - name: Setup .NET
       uses: actions/setup-dotnet@v4

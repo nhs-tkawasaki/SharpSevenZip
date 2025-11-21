@@ -38,6 +38,21 @@ jobs:
       run: fsutil behavior set disable8dot3 0
       working-directory: .
     - uses: actions/checkout@v4
+    # This must be done before the normal setup-dotnet action to ensure DOTNET_ROOT refers to the 64-bit installation
+    - name: Setup .NET x86
+      if: ${{ matrix.arch }} == 'x86'
+      uses: actions/setup-dotnet@v4
+      env:
+        PROCESSOR_ARCHITECTURE: x86
+        DOTNET_INSTALL_DIR: C:\Program Files (x86)\dotnet
+      with:
+        dotnet-version: ${{ matrix.sdk }}
+    # Copy DOTNET_ROOT from the above step to DOTNET_ROOT(x86), the next step will overwrite DOTNET_ROOT to refer to the 64-bit installation
+    - name: Set DOTNET_ROOT(x86)
+      if: ${{ matrix.arch }} == 'x86'
+      shell: pwsh
+      run: |
+        echo "DOTNET_ROOT(x86)=${env:DOTNET_ROOT}" | Out-File -FilePath $env:GITHUB_ENV -Append
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:

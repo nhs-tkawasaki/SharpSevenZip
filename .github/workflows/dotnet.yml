@@ -43,6 +43,6 @@ jobs:
     - name: Build
       run: dotnet build -f ${{ matrix.framework }} --no-restore
     - name: check suppor sfn
-      run: fsutil behavior query disable8dot3
+      run: fsutil behavior set disable8dot3 0
     - name: Test
       run: dotnet test -f ${{ matrix.framework }} --no-build --verbosity normal

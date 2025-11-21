@@ -52,4 +52,5 @@ jobs:
         dotnet build SharpSevenZip.Tests/SharpSevenZip.Tests.csproj -c Release -f ${{ matrix.framework }} -p:Platform=${{ matrix.arch }} --no-restore
         dotnet build SharpSevenZipBenchmarks/SharpSevenZipBenchmarks.csproj -c Release -f ${{ matrix.framework }} -p:Platform=${{ matrix.arch }} --no-restore
     - name: Test
-      run: dotnet test SharpSevenZip.Tests/SharpSevenZip.Tests.csproj -c Release -p:Platform=${{ matrix.arch }} --no-build --verbosity normal
+      if: ${{ !contains(fromJson('["netstandard2.0"]'), matrix.framework) }}
+      run: dotnet test SharpSevenZip.Tests/SharpSevenZip.Tests.csproj -c Release -f ${{ matrix.framework }} -p:Platform=${{ matrix.arch }} --no-build --verbosity normal

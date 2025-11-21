@@ -12,6 +12,10 @@ on:
 jobs:
   build:
 
+    defaults:
+      run:
+        working-directory: SharpSevenZip
+
     runs-on: ubuntu-latest
 
     steps:

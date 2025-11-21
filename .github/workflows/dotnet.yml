@@ -65,7 +65,7 @@ jobs:
       if: ${{ !contains(fromJson('["netstandard2.0"]'), matrix.framework) }}
       run: dotnet build SharpSevenZip.Tests/SharpSevenZip.Tests.csproj -c Release -f ${{ matrix.framework }} -p:Platform=${{ matrix.arch }} --no-restore
     - name: Build (Benchmarks)
-      if: ${{ !contains(fromJson('["netstandard2.0"]'), matrix.framework) || !(${{ matrix.framework }} == 'net48' && ${{ matrix.arch }} == 'x64' ) }}
+      if: ${{ !contains(fromJson('["netstandard2.0"]'), matrix.framework) || !(matrix.framework == 'net48' && matrix.arch == 'x64') }}
       run: dotnet build SharpSevenZipBenchmarks/SharpSevenZipBenchmarks.csproj -c Release -f ${{ matrix.framework }} -p:Platform=${{ matrix.arch }} --no-restore
     - name: Test
       if: ${{ !contains(fromJson('["netstandard2.0"]'), matrix.framework) }}

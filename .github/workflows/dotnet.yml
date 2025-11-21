@@ -20,7 +20,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ windows-latest ]
-        arch: [ win-x64, win-x86 ]
+        arch: [ win-x64 ]
         framework:
           - netstandard2.0
           - net6.0
@@ -45,11 +45,11 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build SharpSevenZip/SharpSevenZip.csproj -c Release -f ${{ matrix.framework }} -r ${{ matrix.arch }} --no-restore
+      run: dotnet build SharpSevenZip/SharpSevenZip.csproj -c Release -f ${{ matrix.framework }} --no-restore
     - name: Build (test)
       if: ${{ !contains(fromJson('["netstandard2.0"]'), matrix.framework) }}
       run: |
-        dotnet build SharpSevenZip.Tests/SharpSevenZip.Tests.csproj -c Release -f ${{ matrix.framework }} -r ${{ matrix.arch }} --no-restore
-        dotnet build SharpSevenZipBenchmarks/SharpSevenZipBenchmarks.csproj -c Release -f ${{ matrix.framework }} -r ${{ matrix.arch }} --no-restore
+        dotnet build SharpSevenZip.Tests/SharpSevenZip.Tests.csproj -c Release -f ${{ matrix.framework }}  --no-restore
+        dotnet build SharpSevenZipBenchmarks/SharpSevenZipBenchmarks.csproj -c Release -f ${{ matrix.framework }} --no-restore
     - name: Test
-      run: dotnet test -c Release -f ${{ matrix.framework }} -r ${{ matrix.arch }} --no-build --verbosity normal
+      run: dotnet test -c Release -f ${{ matrix.framework }}--no-build --verbosity normal

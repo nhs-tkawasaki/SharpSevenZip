@@ -37,7 +37,7 @@ internal static class SharpSevenZipLibraryManager
             return null;
         }
 
-        return Path.Combine(Path.GetDirectoryName(location)!, Environment.Is64BitProcess ? "x64" : "x86", "7z.dll");
+        return Path.Combine(location!, Environment.Is64BitProcess ? "x64" : "x86", "7z.dll");
     }
 
     /// <summary>

@@ -37,15 +37,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\SharpSevenZip.Tests\**\*.cs" />
+    <Compile Include="..\SharpSevenZip.Tests\**\*.cs" Exclude="..\SharpSevenZip.Tests\obj\**\*.cs;..\SharpSevenZip.Tests\bin\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="..\SharpSevenZip.Tests\TestData\*.*">
+    <None Include="..\SharpSevenZip.Tests\TestData\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>TestData\%(Filename)%(Extension)</Link>
     </None>
-    <None Update="..\SharpSevenZip.Tests\TestData_LongerDirectoryName\*.*">
+    <None Include="..\SharpSevenZip.Tests\TestData_LongerDirectoryName\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>TestData_LongerDirectoryName\%(Filename)%(Extension)</Link>
     </None>
   </ItemGroup>
 

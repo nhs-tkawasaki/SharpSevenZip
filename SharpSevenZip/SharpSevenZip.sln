@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpSevenZip", "SharpSeven
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpSevenZip.Tests", "SharpSevenZip.Tests\SharpSevenZip.Tests.csproj", "{AAECE38C-5D0B-41CF-8BDA-FC110E3B5550}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpSevenZip.NetStd20.Tests", "SharpSevenZip.NetStd20.Tests\SharpSevenZip.NetStd20.Tests.csproj", "{FB9B74F8-A57A-410E-94E7-DAB822E9F812}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpSevenZipBenchmarks", "SharpSevenZipBenchmarks\SharpSevenZipBenchmarks.csproj", "{D7ACF08A-3966-490B-9CF2-DAFFC5BACA30}"
 EndProject
 Global
@@ -23,6 +25,10 @@ Global
 		{AAECE38C-5D0B-41CF-8BDA-FC110E3B5550}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAECE38C-5D0B-41CF-8BDA-FC110E3B5550}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAECE38C-5D0B-41CF-8BDA-FC110E3B5550}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB9B74F8-A57A-410E-94E7-DAB822E9F812}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB9B74F8-A57A-410E-94E7-DAB822E9F812}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB9B74F8-A57A-410E-94E7-DAB822E9F812}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB9B74F8-A57A-410E-94E7-DAB822E9F812}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D7ACF08A-3966-490B-9CF2-DAFFC5BACA30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D7ACF08A-3966-490B-9CF2-DAFFC5BACA30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7ACF08A-3966-490B-9CF2-DAFFC5BACA30}.Release|Any CPU.ActiveCfg = Release|Any CPU

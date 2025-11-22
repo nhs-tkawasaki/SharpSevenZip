@@ -31,12 +31,14 @@ internal static class SharpSevenZipLibraryManager
     private static string? DetermineLibraryFilePath()
     {
         string location = AppContext.BaseDirectory;
+        Console.WriteLine($"[Debug] BaseDirectory: {location}");
 
         if (string.IsNullOrEmpty(location))
         {
             return null;
         }
 
+        Console.WriteLine($"[Debug] Directory: {Path.GetDirectoryName(location)}");
         return Path.Combine(Path.GetDirectoryName(location)!, Environment.Is64BitProcess ? "x64" : "x86", "7z.dll");
     }
 
@@ -125,6 +127,8 @@ internal static class SharpSevenZipLibraryManager
                     throw new SharpSevenZipLibraryException("library is invalid.");
                 }
             }
+
+            Console.WriteLine($"[Debug] DLL loaded: {_libraryFileName}");
 
             if (format is InArchiveFormat archiveFormat)
             {

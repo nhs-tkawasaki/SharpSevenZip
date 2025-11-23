@@ -41,7 +41,7 @@ internal static class SharpSevenZipLibraryManager
         Console.WriteLine($"[Debug] Directory: {Path.GetDirectoryName(location)}");
         Console.WriteLine($"[Debug] Trimed Directory: {Path.GetDirectoryName(location.TrimEnd('\\'))}");
         Console.WriteLine($"[Debug] Combined location directly: {Path.Combine(location, Environment.Is64BitProcess ? "x64" : "x86", "7z.dll")}");
-        return Path.Combine(location, Environment.Is64BitProcess ? "x64" : "x86", "7z.dll");
+        return Path.Combine(Path.GetDirectoryName(location)!, Environment.Is64BitProcess ? "x64" : "x86", "7z.dll");
     }
 
     /// <summary>

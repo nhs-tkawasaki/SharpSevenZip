@@ -63,7 +63,10 @@ jobs:
       run: dotnet build SharpSevenZip/SharpSevenZip.csproj -c Release -f ${{ matrix.framework }} -p:Platform=${{ matrix.arch }} --no-restore
     - name: Build (Test)
       if: ${{ matrix.framework != 'netstandard2.0' }}
-      run: dotnet build SharpSevenZip.Tests/SharpSevenZip.Tests.csproj -c Release -f ${{ matrix.framework }} -p:Platform=${{ matrix.arch }} --no-restore
+      run: |
+        dotnet build SharpSevenZip.Tests/SharpSevenZip.Tests.csproj -c Release -f ${{ matrix.framework }} -p:Platform=${{ matrix.arch }} --no-restore
+        dotnet build SharpSevenZip.Tests.MSTest/SharpSevenZip.Tests.MSTest.csproj -c Release -f net472 -p:Platform=${{ matrix.arch }} --no-restore
+        dotnet build SharpSevenZip.Tests.xUnit/SharpSevenZip.Tests.xUnit.csproj -c Release -f net472 -p:Platform=${{ matrix.arch }} --no-restore
     - name: Build (Test)
       if: ${{ matrix.framework == 'netstandard2.0' }}
       run: |

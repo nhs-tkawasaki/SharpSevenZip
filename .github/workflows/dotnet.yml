@@ -34,7 +34,7 @@ jobs:
             runtime: net6.0
             sdk: 6.0.x
           - framework: net48
-            runetime: net48
+            runtime: net48
           - framework: netstandard2.0
             runtime: net472
           - framework: netstandard2.0
@@ -93,8 +93,10 @@ jobs:
       if: ${{ matrix.framework == 'netstandard2.0' }}
       run: |
         dotnet test SharpSevenZip.NetStd20.Tests/SharpSevenZip.NetStd20.Tests.csproj -c Release -p:Platform=${{ matrix.arch }} --no-build --verbosity normal
-    - name: Test
+    - name: Test (MSTest)
       run: |
         dotnet test SharpSevenZip.Tests.MSTest/SharpSevenZip.Tests.MSTest.csproj -c Release -f ${{ matrix.runtime }} -p:Platform=${{ matrix.arch }} --no-build --verbosity normal
+    - name: Test (xUnit)
+      run: |
         dotnet test SharpSevenZip.Tests.xUnit/SharpSevenZip.Tests.xUnit.csproj -c Release -f ${{ matrix.runtime }} -p:Platform=${{ matrix.arch }} --no-build --verbosity normal
 

@@ -28,8 +28,17 @@ jobs:
           - net48
         include:
           - sdk: 8.0.x
+          - framework: net8.0
+            runtime: net8.0
           - framework: net6.0
+            runtime: net6.0
             sdk: 6.0.x
+          - framework: net48
+            runtime: net48
+          - framework: netstandard2.0
+            runtime: net472
+          - framework: netstandard2.0
+            runtime: net462
 
     runs-on: ${{ matrix.os }}
 
@@ -63,17 +72,30 @@ jobs:
       run: dotnet build SharpSevenZip/SharpSevenZip.csproj -c Release -f ${{ matrix.framework }} -p:Platform=${{ matrix.arch }} --no-restore
     - name: Build (Test)
       if: ${{ matrix.framework != 'netstandard2.0' }}
-      run: dotnet build SharpSevenZip.Tests/SharpSevenZip.Tests.csproj -c Release -f ${{ matrix.framework }} -p:Platform=${{ matrix.arch }} --no-restore
+      run: |
+        dotnet build SharpSevenZip.Tests/SharpSevenZip.Tests.csproj -c Release -f ${{ matrix.runtime }} -p:Platform=${{ matrix.arch }} --no-restore
     - name: Build (Test)
       if: ${{ matrix.framework == 'netstandard2.0' }}
-      run: dotnet build SharpSevenZip.NetStd20.Tests/SharpSevenZip.NetStd20.Tests.csproj -c Release -p:Platform=${{ matrix.arch }} --no-restore
+      run: |
+        dotnet build SharpSevenZip.NetStd20.Tests/SharpSevenZip.NetStd20.Tests.csproj -c Release -p:Platform=${{ matrix.arch }} --no-restore
+    - name: Build (Test)
+      run: |
+        dotnet build SharpSevenZip.Tests.MSTest/SharpSevenZip.Tests.MSTest.csproj -c Release -f ${{ matrix.runtime }} -p:Platform=${{ matrix.arch }} --no-restore
+        dotnet build SharpSevenZip.Tests.xUnit/SharpSevenZip.Tests.xUnit.csproj -c Release -f ${{ matrix.runtime }} -p:Platform=${{ matrix.arch }} --no-restore
     - name: Build (Benchmarks)
       if: ${{ matrix.framework != 'netstandard2.0' && !(matrix.framework == 'net48' && matrix.arch == 'x64') }}
       run: dotnet build SharpSevenZipBenchmarks/SharpSevenZipBenchmarks.csproj -c Release -f ${{ matrix.framework }} -p:Platform=${{ matrix.arch }} --no-restore
     - name: Test
       if: ${{ matrix.framework != 'netstandard2.0' }}
-      run: dotnet test SharpSevenZip.Tests/SharpSevenZip.Tests.csproj -c Release -f ${{ matrix.framework }} -p:Platform=${{ matrix.arch }} --no-build --verbosity normal
+      run: |
+        dotnet test SharpSevenZip.Tests/SharpSevenZip.Tests.csproj -c Release -f ${{ matrix.runtime }} -p:Platform=${{ matrix.arch }} --no-build --verbosity normal
     - name: Test
       if: ${{ matrix.framework == 'netstandard2.0' }}
-      run: dotnet test SharpSevenZip.NetStd20.Tests/SharpSevenZip.NetStd20.Tests.csproj -c Release -p:Platform=${{ matrix.arch }} --no-build --verbosity normal
-
+      run: |
+        dotnet test SharpSevenZip.NetStd20.Tests/SharpSevenZip.NetStd20.Tests.csproj -c Release -p:Platform=${{ matrix.arch }} --no-build --verbosity normal
+    - name: Test (xUnit)
+      run: |
+        dotnet test SharpSevenZip.Tests.xUnit/SharpSevenZip.Tests.xUnit.csproj -c Release -f ${{ matrix.runtime }} -p:Platform=${{ matrix.arch }} --no-build --verbosity normal
+    - name: Test (MSTest)
+      run: |
+        dotnet test SharpSevenZip.Tests.MSTest/SharpSevenZip.Tests.MSTest.csproj -c Release -f ${{ matrix.runtime }} -p:Platform=${{ matrix.arch }} --no-build --verbosity normal

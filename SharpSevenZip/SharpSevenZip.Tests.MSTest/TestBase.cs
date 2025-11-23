@@ -1,9 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Threading;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace SharpSevenZip.Tests.MSTest;
+﻿namespace SharpSevenZip.Tests.MSTest;
 
 public abstract class TestBase
 {

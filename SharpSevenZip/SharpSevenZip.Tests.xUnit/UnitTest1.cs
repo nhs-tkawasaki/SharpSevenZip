@@ -1,7 +1,4 @@
-﻿using System.IO;
-using Xunit;
-
-namespace SharpSevenZip.Tests.xUnit
+﻿namespace SharpSevenZip.Tests.xUnit
 {
     public class UnitTest1 : TestBase
     {

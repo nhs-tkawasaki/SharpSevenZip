@@ -93,10 +93,9 @@ jobs:
       if: ${{ matrix.framework == 'netstandard2.0' }}
       run: |
         dotnet test SharpSevenZip.NetStd20.Tests/SharpSevenZip.NetStd20.Tests.csproj -c Release -p:Platform=${{ matrix.arch }} --no-build --verbosity normal
-    - name: Test (MSTest)
-      run: |
-        dotnet test SharpSevenZip.Tests.MSTest/SharpSevenZip.Tests.MSTest.csproj -c Release -f ${{ matrix.runtime }} -p:Platform=${{ matrix.arch }} --no-build --verbosity normal
     - name: Test (xUnit)
       run: |
         dotnet test SharpSevenZip.Tests.xUnit/SharpSevenZip.Tests.xUnit.csproj -c Release -f ${{ matrix.runtime }} -p:Platform=${{ matrix.arch }} --no-build --verbosity normal
-
+    - name: Test (MSTest)
+      run: |
+        dotnet test SharpSevenZip.Tests.MSTest/SharpSevenZip.Tests.MSTest.csproj -c Release -f ${{ matrix.runtime }} -p:Platform=${{ matrix.arch }} --no-build --verbosity normal

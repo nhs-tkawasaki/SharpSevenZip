@@ -34,11 +34,6 @@ namespace SharpSevenZip.Tests.MSTest
                 }
             }
 
-            foreach (var file in Directory.GetFiles(OutputDirectory))
-            {
-                Console.WriteLine($"[Debug]: {file}");
-            }
-
             Assert.HasCount(3, Directory.GetFiles(OutputDirectory));
         }
     }
